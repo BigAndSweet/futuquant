@@ -457,20 +457,15 @@ class NetManager:
 
         err = None
         is_closed = False
-        while True:
-            try:
-                data = conn.sock.recv(1024 * 1024)
-                if data == b'':
-                    is_closed = True
-                    break
-                else:
-                    conn.readbuf.extend(data)
-            except Exception as e:
-                if is_socket_exception_wouldblock(e):
-                    break
-                else:
-                    err = str(e)
-                    break
+        try:
+            data = conn.sock.recv(1024 * 1024)
+            if data == b'':
+                is_closed = True
+            else:
+                conn.readbuf.extend(data)
+        except Exception as e:
+            if not is_socket_exception_wouldblock(e):
+                err = str(e)
 
         while len(conn.readbuf) > 0:
             head_len = get_message_head_len()
