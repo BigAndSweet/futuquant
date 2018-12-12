@@ -69,10 +69,11 @@ class FTLog(object):
             self.log_path = os.path.join(os.getenv("appdata"), __LogPathName__)
         else:
             self.log_path = os.path.join(os.environ['HOME'], ("." + __LogPathName__))
-            # pwd_name = pwd.getpwuid(os.getuid())[0]
-            # self.log_path = os.path.join(pwd_name, __LogName__)
 
-        self.file_level = logging.DEBUG
+        if not os.path.exists(self.log_path):
+            os.makedirs(self.log_path)
+
+        self.file_level = logging.WARNING
         self.console_level = logging.WARNING
 
         if "file_level" in args:

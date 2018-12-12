@@ -34,3 +34,4 @@ from futuquant.common.sys_config import SysConfig
 
 with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'VERSION.txt'), 'rb') as f:
     __version__ = f.read().decode('ascii').strip()
+print("futuquant已经升级改名为futu-api，futuquant不再升级维护，详见https://futunnopen.github.io/futu-api-doc")
