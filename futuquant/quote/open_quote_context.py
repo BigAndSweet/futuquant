@@ -625,7 +625,7 @@ class OpenQuoteContext(OpenContextBase):
                 pe_ratio                   float          市盈率（该字段为比例字段，默认不展示%）
                 pb_ratio                   float          市净率（该字段为比例字段，默认不展示%）
                 pe_ttm_ratio               float          市盈率TTM（该字段为比例字段，默认不展示%）
-                stock_owner                str            所属正股的代码
+                stock_owner                str            涡轮所属正股的代码或期权的标的股代码
                 wrt_valid                  bool           是否是窝轮（为true时以下涡轮相关的字段才有合法数据）
                 wrt_conversion_ratio       float          换股比率（该字段为比例字段，默认不展示%）
                 wrt_type                   str            窝轮类型，参见WrtType
@@ -1798,3 +1798,39 @@ class OpenQuoteContext(OpenContextBase):
         option_chain.index = range(len(option_chain))
 
         return RET_OK, option_chain
+
+    def get_order_detail(self, code):
+        """
+        查询A股Level 2权限下提供的委托明细
+
+        :param code: 股票代码,例如：'HK.02318'
+        :return: (ret, data)
+
+                ret == RET_OK data为1个dict，包含以下数据
+
+                ret != RET_OK data为错误字符串
+
+                {‘code’: 股票代码
+                ‘Ask’:[ order_num, [order_volume1, order_volume2] ]
+                ‘Bid’: [ order_num, [order_volume1, order_volume2] ]
+                }
+
+                'Ask'：卖盘， 'Bid'买盘。order_num指委托订单数量，order_volume是每笔委托的委托量，当前最多返回前50笔委托的委托数量。即order_num有可能多于后面的order_volume
+        """
+
+        if code is None or is_str(code) is False:
+            error_str = ERROR_STR_PREFIX + "the type of code param is wrong"
+            return RET_ERROR, error_str
+
+        query_processor = self._get_sync_query_processor(
+            OrderDetail.pack_req, OrderDetail.unpack_rsp)
+        kargs = {
+            "code": code,
+            "conn_id": self.get_sync_conn_id()
+        }
+
+        ret_code, msg, order_detail = query_processor(**kargs)
+        if ret_code == RET_ERROR:
+            return ret_code, msg
+
+        return RET_OK, order_detail

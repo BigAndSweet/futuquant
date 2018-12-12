@@ -17,7 +17,7 @@ from futuquant.quote.quote_query import KeepAlive, parse_head
 from futuquant.common.conn_mng import FutuConnMng
 from futuquant.common.network_manager import NetManager
 from .err import Err
-from .ft_logger import make_log_msg
+from .ft_logger import *
 from .callback_executor import callback_executor, CallbackItem
 
 _SyncReqRet = namedtuple('_SyncReqRet', ('ret', 'msg'))
@@ -92,7 +92,7 @@ class OpenContextBase(object):
             self._conn_id = 0
             self._net_mgr = None
             self.stop()
-            self._handlers_ctx = None
+            self._handler_ctx = None
             if self._reconnect_timer is not None:
                 self._reconnect_timer.cancel()
                 self._reconnect_timer = None
@@ -297,7 +297,7 @@ class OpenContextBase(object):
         if ret == RET_OK:
             ret, msg = self._net_mgr.send(conn_id, req_str)
         else:
-            logger.warning(make_log_msg('InitConnect.pack_req fail', msg=msg))
+            logger.warning(FTLog.make_log_msg('InitConnect.pack_req fail', msg=msg))
 
         if ret != RET_OK:
             with self._lock:
@@ -375,9 +375,9 @@ class OpenContextBase(object):
                 self._net_mgr.set_conn_info(conn_id, conn_info)
                 self._last_keep_alive_time = datetime.now()
                 FutuConnMng.add_conn(conn_info)
-                logger.info(make_log_msg("InitConnect ok", conn_id=conn_id, info=conn_info))
+                logger.info(FTLog.make_log_msg("InitConnect ok", conn_id=conn_id, info=conn_info))
             else:
-                logger.warning(make_log_msg("InitConnect error", msg=msg))
+                logger.warning(FTLog.make_log_msg("InitConnect error", msg=msg))
                 self._wait_reconnect()
 
     def _handle_keep_alive(self, conn_id, proto_info, ret_code, msg, rsp_pb):

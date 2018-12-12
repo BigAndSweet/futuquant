@@ -6,7 +6,7 @@ from futuquant.common.utils import *
 from futuquant.quote.quote_query import parse_head
 from .err import Err
 from .sys_config import SysConfig
-from .ft_logger import make_log_msg
+from .ft_logger import *
 
 if IS_PY2:
     import selectors2 as selectors
@@ -76,24 +76,37 @@ def is_socket_exception_wouldblock(e):
 
 
 def make_ctrl_socks():
-    svr_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
-    svr_sock.bind(('127.0.0.1', 0))
-    svr_sock.listen(1)
-    port = svr_sock.getsockname()[1]
-    write_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
-    write_sock.setblocking(False)
-    try:
-        write_sock.connect(('127.0.0.1', port))
-    except Exception as e:
-        if not is_socket_exception_wouldblock(e):
-            logger.warning(make_log_msg("Fail to create ctrl socket", msg=str(e)))
+    LOCAL_HOST = '127.0.0.1'
+
+    if IS_PY2:
+        svr_sock = []
+        lsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+        def svr_sock_func():
+            try:
+                sock, _ = lsock.accept()
+                svr_sock.append(sock)
+            except Exception as e:
+                logger.warning('Ctrl sock fail: {}'.format(str(e)))
+
+        try:
+            lsock.bind((LOCAL_HOST, 0))
+            _, port = lsock.getsockname()[:2]
+            lsock.listen(1)
+            thread = threading.Thread(target=svr_sock_func)
+            thread.start()
+            client_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            client_sock.settimeout(0.1)
+            client_sock.connect((LOCAL_HOST, port))
+            thread.join()
+            return svr_sock[0], client_sock
+        except Exception as e:
+            logger.warning('Ctrl sock fail: {}'.format(str(e)))
             return None, None
-
-    read_sock = svr_sock.accept()[0]
-    svr_sock.close()
-    write_sock.setblocking(True)
-    return read_sock, write_sock
-
+        finally:
+            lsock.close()
+    else:
+        return socket.socketpair()
 
 class NetManager:
     _default_inst = None
@@ -278,7 +291,7 @@ class NetManager:
         sync_req_rsp = None
         if not conn:
             logger.debug(
-                make_log_msg('Send fail', conn_id=conn_id, proto_id=proto_info.proto_id, serial_no=proto_info.serial_no,
+                FTLog.make_log_msg('Send fail', conn_id=conn_id, proto_id=proto_info.proto_id, serial_no=proto_info.serial_no,
                              msg=Err.ConnectionLost.text))
             ret_code, msg = RET_ERROR, Err.ConnectionLost.text
         else:
@@ -291,7 +304,7 @@ class NetManager:
             ret_code, msg = RET_ERROR, Err.NotConnected.text
 
         if ret_code != RET_OK:
-            logger.warning(make_log_msg('Send fail', proto_id=proto_info.proto_id, serial_no=proto_info.serial_no,
+            logger.warning(FTLog.make_log_msg('Send fail', proto_id=proto_info.proto_id, serial_no=proto_info.serial_no,
                                         conn_id=conn_id, msg=msg))
             if sync_req_rsp:
                 sync_req_rsp.ret, sync_req_rsp.msg = RET_ERROR, msg
@@ -317,7 +330,7 @@ class NetManager:
             self._watch_write(conn, True)
 
         if ret_code != RET_OK:
-            logger.warning(make_log_msg('Send error', conn_id=conn_id, msg=msg))
+            logger.warning(FTLog.make_log_msg('Send error', conn_id=conn_id, msg=msg))
             if sync_req_rsp:
                 sync_req_rsp.ret, sync_req_rsp.msg = RET_ERROR, msg
                 sync_req_rsp.event.set()
@@ -444,20 +457,15 @@ class NetManager:
 
         err = None
         is_closed = False
-        while True:
-            try:
-                data = conn.sock.recv(1024 * 1024)
-                if data == b'':
-                    is_closed = True
-                    break
-                else:
-                    conn.readbuf.extend(data)
-            except Exception as e:
-                if is_socket_exception_wouldblock(e):
-                    break
-                else:
-                    err = str(e)
-                    break
+        try:
+            data = conn.sock.recv(1024 * 1024)
+            if data == b'':
+                is_closed = True
+            else:
+                conn.readbuf.extend(data)
+        except Exception as e:
+            if not is_socket_exception_wouldblock(e):
+                err = str(e)
 
         while len(conn.readbuf) > 0:
             head_len = get_message_head_len()
@@ -474,7 +482,7 @@ class NetManager:
 
         if is_closed:
             self.close(conn.conn_id)
-            conn.handler.on_closed(conn.conn_id)
+            conn.handler.on_error(conn.conn_id, Err.ConnectionClosed.text)
         elif err:
             self.close(conn.conn_id)
             conn.handler.on_error(conn.conn_id, err)

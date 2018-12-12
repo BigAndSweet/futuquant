@@ -280,11 +280,15 @@ class SubType(object):
       分时
      ..  py:attribute:: BROKER
       买卖经纪
+     ..  py:attribute:: ORDER_DETAIL
+      委托明细
     """
     TICKER = "TICKER"
     QUOTE = "QUOTE"
     ORDER_BOOK = "ORDER_BOOK"
+    ORDER_DETAIL = "ORDER_DETAIL"
     K_1M = "K_1M"
+    K_3M = "K_3M"
     K_5M = "K_5M"
     K_15M = "K_15M"
     K_30M = "K_30M"
@@ -292,13 +296,15 @@ class SubType(object):
     K_DAY = "K_DAY"
     K_WEEK = "K_WEEK"
     K_MON = "K_MON"
+    K_QUARTER = "K_QUARTER"
+    K_YEAR = "K_YEAR"
     RT_DATA = "RT_DATA"
     BROKER = "BROKER"
 
 
 KLINE_SUBTYPE_LIST = [SubType.K_DAY, SubType.K_MON, SubType.K_WEEK,
-                      SubType.K_1M, SubType.K_5M, SubType.K_15M,
-                      SubType.K_30M, SubType.K_60M
+                      SubType.K_1M, SubType.K_3M, SubType.K_5M, SubType.K_15M,
+                      SubType.K_30M, SubType.K_60M, SubType.K_QUARTER, SubType.K_YEAR,
                       ]
 
 
@@ -315,9 +321,12 @@ SUBTYPE_MAP = {
     SubType.K_1M: 11,
     SubType.K_WEEK: 12,
     SubType.K_MON: 13,
-    SubType.BROKER: 14
+    SubType.BROKER: 14,
+    SubType.K_QUARTER: 15,
+    SubType.K_YEAR: 16,
+    SubType.K_3M: 17,
+    SubType.ORDER_DETAIL: 18
 }
-
 
 # k线类型
 class KLType(object):
@@ -342,6 +351,7 @@ class KLType(object):
       月K线
     """
     K_1M = "K_1M"
+    K_3M = "K_3M"
     K_5M = "K_5M"
     K_15M = "K_15M"
     K_30M = "K_30M"
@@ -349,18 +359,23 @@ class KLType(object):
     K_DAY = "K_DAY"
     K_WEEK = "K_WEEK"
     K_MON = "K_MON"
+    K_1M = "K_1M"
+    K_QUARTER = "K_QUARTER"
+    K_YEAR = "K_YEAR"
 
 KTYPE_MAP = {
     KLType.K_1M: 1,
+    KLType.K_3M: 10,
     KLType.K_5M: 6,
     KLType.K_15M: 7,
     KLType.K_30M: 8,
     KLType.K_60M: 9,
     KLType.K_DAY: 2,
     KLType.K_WEEK: 3,
-    KLType.K_MON: 4
+    KLType.K_MON: 4,
+    KLType.K_QUARTER: 11,
+    KLType.K_YEAR: 5
 }
-
 
 class KLDataStatus(object):
     """
@@ -713,16 +728,18 @@ class ProtoId(object):
     Qot_RequestHistoryKL = 3103 # 拉取历史K线
 
     # 其他行情数据
-    Qot_GetTradeDate = 3200  # 获取市场交易日
-    Qot_GetSuspend = 3201  # 获取股票停牌信息
-    Qot_GetStaticInfo = 3202  # 获取股票列表
+    Qot_GetTradeDate = 3200         # 获取市场交易日
+    Qot_GetSuspend = 3201           # 获取股票停牌信息
+    Qot_GetStaticInfo = 3202        # 获取股票列表
     Qot_GetSecuritySnapshot = 3203  # 获取股票快照
-    Qot_GetPlateSet = 3204  # 获取板块集合下的板块
-    Qot_GetPlateSecurity = 3205  # 获取板块下的股票
-    Qot_GetReference = 3206  # 获取正股相关股票，暂时只有窝轮
-    Qot_GetOwnerPlate = 3207  # 获取股票所属板块
-    Qot_GetHoldingChangeList = 3208  # 获取高管持股变动
-    Qot_GetOptionChain = 3209  # 获取期权链
+    Qot_GetPlateSet = 3204          # 获取板块集合下的板块
+    Qot_GetPlateSecurity = 3205     # 获取板块下的股票
+    Qot_GetReference = 3206         # 获取正股相关股票，暂时只有窝轮
+    Qot_GetOwnerPlate = 3207        # 获取股票所属板块
+    Qot_GetHoldingChangeList = 3208     # 获取高管持股变动
+    Qot_GetOptionChain = 3209           # 获取期权链
+    Qot_GetOrderDetail = 3016           # 获取委托明细
+    Qot_UpdateOrderDetail = 3017        # 推送委托明细
 
     All_PushId = [Notify, KeepAlive, Trd_UpdateOrder, Trd_UpdateOrderFill, Qot_UpdateBroker,
                   Qot_UpdateOrderBook, Qot_UpdateKL, Qot_UpdateRT, Qot_UpdateBasicQot, Qot_UpdateTicker]
