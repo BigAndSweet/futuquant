@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>基础定义 &mdash; futuquant 3.5 documentation</title>
+  <title>基础定义 &mdash; futu-api-doc 3.6 documentation</title>
   
 
   
@@ -30,11 +30,15 @@
   
 
   
+    <link rel="stylesheet" href="../_static/css/myStyle.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/myStyle.css" type="text/css" />
+  
 
   
-    <link rel="top" title="futuquant 3.5 documentation" href="../index.html"/>
+    <link rel="top" title="futu-api-doc 3.6 documentation" href="../index.html"/>
         <link rel="next" title="行情协议" href="quote_protocol.html"/>
-        <link rel="prev" title="协议接口指南" href="intro.html"/> 
+        <link rel="prev" title="协议接口" href="intro.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -53,7 +57,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> futuquant
+            <a href="../index.html" class="icon icon-home"> futu-api-doc
           
 
           
@@ -63,7 +67,7 @@
             
             
               <div class="version">
-                3.5
+                3.6
               </div>
             
           
@@ -90,19 +94,11 @@
               <p class="caption"><span class="caption-text">基础</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../intro/intro.html">介绍</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../setup/setup.html">安装指南</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../setup/FutuOpenDGuide.html">FutuOpenD使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../setup/Hist_KLine_Download_Intro.html">下载历史数据</a></li>
-</ul>
-<p class="caption"><span class="caption-text">API</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../api/Base_API.html">基础API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/Quote_API.html">行情API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/Trade_API.html">交易API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/FutuOpenDGuide.html">FutuOpenD使用说明</a></li>
 </ul>
 <p class="caption"><span class="caption-text">PROTOCOL</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="intro.html">协议接口指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">协议接口</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">基础定义</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#initconnect-proto-1001">InitConnect.proto - 1001初始化连接</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getglobalstate-proto-1002">GetGlobalState.proto - 1002获取全局状态</a></li>
@@ -140,7 +136,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#broker">Broker - 买卖经纪摆盘</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ticker">Ticker - 逐笔成交</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#orderbook">OrderBook - 买卖十档摆盘</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#orderdetail">OrderDetail - 委托明细</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#shareholdingchange">ShareHoldingChange - 持股变动</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#subinfo">SubInfo - 单个定阅类型信息</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#connsubinfo">ConnSubInfo - 单条连接定阅信息</a></li>
@@ -171,6 +166,14 @@
 <li class="toctree-l1"><a class="reference internal" href="quote_protocol.html">行情协议</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trade_protocol.html">交易协议</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/intro.html">介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/setup.html">安装指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/Base_API.html">基础API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/Quote_API.html">行情API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/Trade_API.html">交易API</a></li>
+</ul>
 <p class="caption"><span class="caption-text">Q&amp;A</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../q&amp;a/Q&amp;A.html">Q&amp;A</a></li>
@@ -188,7 +191,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">futuquant</a>
+          <a href="../index.html">futu-api-doc</a>
         
       </nav>
 
@@ -270,7 +273,7 @@
 </div>
 <hr class="docutils" />
 <div class="section" id="initconnect-proto-1001">
-<h2><a class="reference external" href="https://github.com/FutunnOpen/futuquant/blob/master/futuquant/common/pb/InitConnect.proto">InitConnect.proto</a> - 1001初始化连接<a class="headerlink" href="#initconnect-proto-1001" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference external" href="https://github.com/FutunnOpen/py-futu-api/tree/master/futu/common/pb/InitConnect.proto">InitConnect.proto</a> - 1001初始化连接<a class="headerlink" href="#initconnect-proto-1001" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-protobuf"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="s">&quot;Common.proto&quot;</span><span class="p">;</span>
 <span class="kd">message</span> <span class="nc">C2S</span>
 <span class="p">{</span>
@@ -314,7 +317,7 @@
 </div>
 <hr class="docutils" />
 <div class="section" id="getglobalstate-proto-1002">
-<h2><a class="reference external" href="https://github.com/FutunnOpen/futuquant/blob/master/futuquant/common/pb/GetGlobalState.proto">GetGlobalState.proto</a> - 1002获取全局状态<a class="headerlink" href="#getglobalstate-proto-1002" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference external" href="https://github.com/FutunnOpen/py-futu-api/tree/master/futu/common/pb/GetGlobalState.proto">GetGlobalState.proto</a> - 1002获取全局状态<a class="headerlink" href="#getglobalstate-proto-1002" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-protobuf"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="s">&quot;Common.proto&quot;</span><span class="p">;</span>
 <span class="k">import</span> <span class="s">&quot;Qot_Common.proto&quot;</span><span class="p">;</span>
 
@@ -326,7 +329,6 @@
 <span class="kd">message</span> <span class="nc">S2C</span>
 <span class="p">{</span>
         <span class="k">required</span> <span class="kt">int32</span> <span class="na">marketHK</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">//Qot_Common.QotMarketState,港股主板市场状态</span>
-        <span class="k">required</span> <span class="kt">int32</span> <span class="na">marketUS</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//Qot_Common.QotMarketState,美股Nasdaq市场状态</span>
         <span class="k">required</span> <span class="kt">int32</span> <span class="na">marketSH</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">//Qot_Common.QotMarketState,沪市状态</span>
         <span class="k">required</span> <span class="kt">int32</span> <span class="na">marketSZ</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">//Qot_Common.QotMarketState,深市状态</span>
         <span class="k">required</span> <span class="kt">int32</span> <span class="na">marketHKFuture</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>      <span class="c1">//Qot_Common.QotMarketState,港股期货市场状态</span>
@@ -361,7 +363,7 @@
 </div>
 <hr class="docutils" />
 <div class="section" id="notify-proto-1003">
-<h2><a class="reference external" href="https://github.com/FutunnOpen/futuquant/blob/master/futuquant/common/pb/Notify.proto">Notify.proto</a> - 1003系统推送通知<a class="headerlink" href="#notify-proto-1003" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference external" href="https://github.com/FutunnOpen/py-futu-api/tree/master/futu/common/pb/Notify.proto">Notify.proto</a> - 1003系统推送通知<a class="headerlink" href="#notify-proto-1003" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-protobuf"><div class="highlight"><pre><span></span><span class="kd">enum</span> <span class="n">NotifyType</span>
 <span class="p">{</span>
         <span class="na">NotifyType_None</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//无</span>
@@ -420,7 +422,7 @@
 </div>
 <hr class="docutils" />
 <div class="section" id="keepalive-proto-1004">
-<h2><a class="reference external" href="https://github.com/FutunnOpen/futuquant/blob/master/futuquant/common/pb/KeepAlive.proto">KeepAlive.proto</a> - 1004保活心跳<a class="headerlink" href="#keepalive-proto-1004" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference external" href="https://github.com/FutunnOpen/py-futu-api/tree/master/futu/common/pb/KeepAlive.proto">KeepAlive.proto</a> - 1004保活心跳<a class="headerlink" href="#keepalive-proto-1004" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-protobuf"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="s">&quot;Common.proto&quot;</span><span class="p">;</span>
 <span class="kd">message</span> <span class="nc">C2S</span>
 <span class="p">{</span>
@@ -456,7 +458,7 @@
 </div>
 <hr class="docutils" />
 <div class="section" id="id2">
-<h2><a class="reference external" href="https://github.com/FutunnOpen/futuquant/blob/master/futuquant/common/pb/Common.proto">Common.proto</a> - 通用定义<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference external" href="https://github.com/FutunnOpen/py-futu-api/tree/master/futu/common/pb/Common.proto">Common.proto</a> - 通用定义<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="rettype">
 <h3>RetType - 协议返回值<a class="headerlink" href="#rettype" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-protobuf"><div class="highlight"><pre><span></span><span class="c1">//返回结果</span>
@@ -499,7 +501,7 @@
 </div>
 <hr class="docutils" />
 <div class="section" id="id3">
-<h2><a class="reference external" href="https://github.com/FutunnOpen/futuquant/blob/master/futuquant/common/pb/Qot_Common.proto">Qot_Common.proto</a> - 行情通用定义<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference external" href="https://github.com/FutunnOpen/py-futu-api/tree/master/futu/common/pb/Qot_Common.proto">Qot_Common.proto</a> - 行情通用定义<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="qotmarket">
 <h3>QotMarket - 行情市场<a class="headerlink" href="#qotmarket" title="Permalink to this headline">¶</a></h3>
 <blockquote>
@@ -508,7 +510,6 @@
         <span class="na">QotMarket_Unknown</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//未知市场</span>
         <span class="na">QotMarket_HK_Security</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">//港股</span>
         <span class="na">QotMarket_HK_Future</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//港期货(目前是恒指的当月、下月期货行情)</span>
-        <span class="na">QotMarket_US_Security</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span> <span class="c1">//美股</span>
         <span class="na">QotMarket_CNSH_Security</span> <span class="o">=</span> <span class="mi">21</span><span class="p">;</span> <span class="c1">//沪股</span>
         <span class="na">QotMarket_CNSZ_Security</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span> <span class="c1">//深股</span>
 <span class="p">}</span>
@@ -709,7 +710,6 @@
         <span class="na">SubType_KL_Qurater</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span> <span class="c1">//季K</span>
         <span class="na">SubType_KL_Year</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span> <span class="c1">//年K</span>
         <span class="na">SubType_KL_3Min</span> <span class="o">=</span> <span class="mi">17</span><span class="p">;</span> <span class="c1">//3分K</span>
-        <span class="na">SubType_OrderDetail</span> <span class="o">=</span> <span class="mi">18</span><span class="p">;</span> <span class="c1">//委托明细</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1003,19 +1003,6 @@
 </div></blockquote>
 </div>
 <hr class="docutils" />
-<div class="section" id="orderdetail">
-<h3>OrderDetail - 委托明细<a class="headerlink" href="#orderdetail" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><div class="highlight-protobuf"><div class="highlight"><pre><span></span><span class="kd">message</span> <span class="nc">OrderDetail</span>
-<span class="p">{</span>
-        <span class="k">required</span> <span class="kt">int32</span> <span class="na">orderCount</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">//委托订单个数</span>
-        <span class="k">required</span> <span class="kt">double</span> <span class="na">orderVol</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//每笔委托的委托量，注意：当前只会返回最多前50笔委托的委托数量</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div></blockquote>
-</div>
-<hr class="docutils" />
 <div class="section" id="shareholdingchange">
 <h3>ShareHoldingChange - 持股变动<a class="headerlink" href="#shareholdingchange" title="Permalink to this headline">¶</a></h3>
 <blockquote>
@@ -1081,7 +1068,7 @@
 </div>
 <hr class="docutils" />
 <div class="section" id="id5">
-<h2><a class="reference external" href="https://github.com/FutunnOpen/futuquant/blob/master/futuquant/common/pb/Trd_Common.proto">Trd_Common.proto</a> - 交易通用定义<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference external" href="https://github.com/FutunnOpen/py-futu-api/tree/master/futu/common/pb/Trd_Common.proto">Trd_Common.proto</a> - 交易通用定义<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="orderstatus">
 <h3>OrderStatus - 订单状态<a class="headerlink" href="#orderstatus" title="Permalink to this headline">¶</a></h3>
 <blockquote>
@@ -1394,7 +1381,7 @@
         <a href="quote_protocol.html" class="btn btn-neutral float-right" title="行情协议" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="intro.html" class="btn btn-neutral" title="协议接口指南" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="intro.html" class="btn btn-neutral" title="协议接口" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -1424,7 +1411,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'3.5',
+            VERSION:'3.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -1452,7 +1439,7 @@
   
  
 <script type="text/javascript">
-    console.log("Layout By FutuQuant");
+    console.log("Layout By futu-api");
 </script>
 
 

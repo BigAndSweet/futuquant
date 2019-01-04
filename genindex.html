@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; futuquant 3.5 documentation</title>
+  <title>Index &mdash; futu-api-doc 3.6 documentation</title>
   
 
   
@@ -31,9 +31,13 @@
   
 
   
+    <link rel="stylesheet" href="_static/css/myStyle.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/css/myStyle.css" type="text/css" />
+  
 
   
-    <link rel="top" title="futuquant 3.5 documentation" href="index.html"/> 
+    <link rel="top" title="futu-api-doc 3.6 documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -52,7 +56,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> futuquant
+            <a href="index.html" class="icon icon-home"> futu-api-doc
           
 
           
@@ -62,7 +66,7 @@
             
             
               <div class="version">
-                3.5
+                3.6
               </div>
             
           
@@ -89,22 +93,22 @@
               <p class="caption"><span class="caption-text">基础</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="intro/intro.html">介绍</a></li>
-<li class="toctree-l1"><a class="reference internal" href="setup/setup.html">安装指南</a></li>
-<li class="toctree-l1"><a class="reference internal" href="setup/FutuOpenDGuide.html">FutuOpenD使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="setup/Hist_KLine_Download_Intro.html">下载历史数据</a></li>
-</ul>
-<p class="caption"><span class="caption-text">API</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="api/Base_API.html">基础API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/Quote_API.html">行情API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/Trade_API.html">交易API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro/FutuOpenDGuide.html">FutuOpenD使用说明</a></li>
 </ul>
 <p class="caption"><span class="caption-text">PROTOCOL</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="protocol/intro.html">协议接口指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protocol/intro.html">协议接口</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protocol/base_define.html">基础定义</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protocol/quote_protocol.html">行情协议</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protocol/trade_protocol.html">交易协议</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/intro.html">介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/setup.html">安装指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/Base_API.html">基础API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/Quote_API.html">行情API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/Trade_API.html">交易API</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Q&amp;A</span></p>
 <ul>
@@ -123,7 +127,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">futuquant</a>
+          <a href="index.html">futu-api-doc</a>
         
       </nav>
 
@@ -628,10 +632,6 @@
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="api/Quote_API.html#get_order_detail">get_order_detail() (built-in function)</a>
-  </dt>
-
-      
   <dt><a href="api/Quote_API.html#get_owner_plate">get_owner_plate() (built-in function)</a>
   </dt>
 
@@ -796,6 +796,16 @@
 
       </dl></dd>
       
+  <dt><a href="api/Base_API.html#KLType.K_3M">K_3M (KLType attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/Base_API.html#SubType.K_3M">(SubType attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
   <dt><a href="api/Base_API.html#KLType.K_5M">K_5M (KLType attribute)</a>
   </dt>
 
@@ -838,12 +848,32 @@
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="api/Base_API.html#KLType.K_QUARTER">K_QUARTER (KLType attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/Base_API.html#SubType.K_QUARTER">(SubType attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
   <dt><a href="api/Base_API.html#KLType.K_WEEK">K_WEEK (KLType attribute)</a>
   </dt>
 
       <dd><dl>
         
   <dt><a href="api/Base_API.html#SubType.K_WEEK">(SubType attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/Base_API.html#KLType.K_YEAR">K_YEAR (KLType attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/Base_API.html#SubType.K_YEAR">(SubType attribute)</a>
   </dt>
 
       </dl></dd>
@@ -1082,7 +1112,7 @@
   </dt>
 
       
-  <dt><a href="api/Quote_API.html#on_recv_rsp">on_recv_rsp() (built-in function)</a>, <a href="api/Quote_API.html#on_recv_rsp">[1]</a>, <a href="api/Quote_API.html#on_recv_rsp">[2]</a>, <a href="api/Quote_API.html#on_recv_rsp">[3]</a>, <a href="api/Quote_API.html#on_recv_rsp">[4]</a>, <a href="api/Quote_API.html#on_recv_rsp">[5]</a>, <a href="api/Quote_API.html#on_recv_rsp">[6]</a>, <a href="api/Quote_API.html#on_recv_rsp">[7]</a>, <a href="api/Trade_API.html#on_recv_rsp">[8]</a>, <a href="api/Trade_API.html#on_recv_rsp">[9]</a>
+  <dt><a href="api/Quote_API.html#on_recv_rsp">on_recv_rsp() (built-in function)</a>, <a href="api/Quote_API.html#on_recv_rsp">[1]</a>, <a href="api/Quote_API.html#on_recv_rsp">[2]</a>, <a href="api/Quote_API.html#on_recv_rsp">[3]</a>, <a href="api/Quote_API.html#on_recv_rsp">[4]</a>, <a href="api/Quote_API.html#on_recv_rsp">[5]</a>, <a href="api/Quote_API.html#on_recv_rsp">[6]</a>, <a href="api/Trade_API.html#on_recv_rsp">[7]</a>, <a href="api/Trade_API.html#on_recv_rsp">[8]</a>
   </dt>
 
       
@@ -1099,10 +1129,6 @@
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
-      
-  <dt><a href="api/Base_API.html#SubType.ORDER_DETAIL">ORDER_DETAIL (SubType attribute)</a>
-  </dt>
-
       
   <dt><a href="api/Trade_API.html#order_list_query">order_list_query() (built-in function)</a>
   </dt>
@@ -1448,15 +1474,9 @@
   </dt>
 
       
-  <dt><a href="api/Base_API.html#Market.US">US (Market attribute)</a>
+  <dt><a href="api/Base_API.html#TrdMarket.US">US (TrdMarket attribute)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="api/Base_API.html#TrdMarket.US">(TrdMarket attribute)</a>
-  </dt>
-
-      </dl></dd>
   </dl></td>
 </tr></table>
 
@@ -1529,7 +1549,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'3.5',
+            VERSION:'3.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -1557,7 +1577,7 @@
   
  
 <script type="text/javascript">
-    console.log("Layout By FutuQuant");
+    console.log("Layout By futu-api");
 </script>
 
 

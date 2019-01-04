@@ -28,8 +28,8 @@ set_client_info
 
   .. code:: python
 
-   from futuquant import *
-   SysConfig.set_client_info("MyFutuQuant", 0)
+   from futu import *
+   SysConfig.set_client_info("MyFutuAPI", 0)
    quote_ctx = OpenQuoteContext(host='127.0.0.1', port=11111)
    quote_ctx.close()
 	
@@ -49,7 +49,7 @@ set_proto_fmt
 
   .. code:: python
 
-   from futuquant import *
+   from futu import *
    SysConfig.set_proto_fmt(ProtoFMT.Protobuf)
    quote_ctx = OpenQuoteContext(host='127.0.0.1', port=11111)
    quote_ctx.close()
@@ -70,7 +70,7 @@ enable_proto_encrypt
 
   .. code:: python
 
-   from futuquant import *
+   from futu import *
    SysConfig.enable_proto_encrypt(True)
    SysConfig.set_init_rsa_file("conn_key.txt")   # rsa 私钥文件路径
    quote_ctx = OpenQuoteContext(host='127.0.0.1', port=11111)
@@ -92,7 +92,7 @@ set_init_rsa_file
 
   .. code:: python
 
-   from futuquant import *
+   from futu import *
    SysConfig.enable_proto_encrypt(True)
    SysConfig.set_init_rsa_file("conn_key.txt")   # rsa 私钥文件路径
    quote_ctx = OpenQuoteContext(host='127.0.0.1', port=11111)
@@ -115,7 +115,7 @@ set_all_thread_daemon
 
   .. code:: python
 
-   from futuquant import *
+   from futu import *
    SysConfig.set_all_thread_daemon(True)
    quote_ctx = OpenQuoteContext(host='127.0.0.1', port=11111)
    # 不调用quote_ctx.close()，进程也会退出
@@ -164,10 +164,6 @@ Market - 行情市场
  ..  py:attribute:: HK    
     
   港股
-  
- ..  py:attribute:: US
-    
-  美股
   
  ..  py:attribute:: SH  
     
@@ -360,9 +356,13 @@ SubType - 实时数据定阅类型
  ..  py:attribute:: K_1M
  
   1分钟K线
-  
+
+ ..  py:attribute:: K_3M
+
+  3分钟K线
+
  ..  py:attribute:: K_5M
- 
+
   5分钟K线
   
  ..  py:attribute:: K_15M
@@ -388,18 +388,22 @@ SubType - 实时数据定阅类型
  ..  py:attribute:: K_MON
  
   月K线
+
+ ..  py:attribute:: K_QUARTER
+
+  季K线
+
+ ..  py:attribute:: K_YEAR
+
+  年K线
   
  ..  py:attribute:: RT_DATA
- 
+
   分时
   
  ..  py:attribute:: BROKER
  
    买卖经纪
-  
- ..  py:attribute:: ORDER_DETAIL
- 
-  委托摆盘明细
   
 
 --------------------------------------
@@ -414,6 +418,10 @@ k线类型定义
  ..  py:attribute:: K_1M
  
   1分钟K线
+
+ ..  py:attribute:: K_3M
+
+  3分钟K线
   
  ..  py:attribute:: K_5M
  
@@ -443,6 +451,13 @@ k线类型定义
  
   月K线
   
+ ..  py:attribute:: K_QUARTER
+
+  季K线
+
+ ..  py:attribute:: K_YEAR
+
+  年K线
 
 --------------------------------------
 

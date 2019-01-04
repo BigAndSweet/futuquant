@@ -29,7 +29,7 @@
 
 .. code:: python
 
-	from futuquant import *
+	from futu import *
 	pwd_unlock = '123456'
 	trd_ctx = OpenHKTradeContext(host='127.0.0.1', port=11111)
 	print(trd_ctx.unlock_trade(pwd_unlock))
@@ -49,11 +49,11 @@ close
 
 ..  py:function:: close
 
-关闭上下文对象。默认情况下，futuquant内部创建的线程会阻止进程退出，只有当所有context都close后，进程才能正常退出。但通过SysConfig.set_all_thread_daemon可以设置所有内部线程为daemon线程，这时即使没有调用context的close，进程也可以正常退出。
+关闭上下文对象。默认情况下，futu-api内部创建的线程会阻止进程退出，只有当所有context都close后，进程才能正常退出。但通过SysConfig.set_all_thread_daemon可以设置所有内部线程为daemon线程，这时即使没有调用context的close，进程也可以正常退出。
 
 .. code:: python
 
-    from futuquant import *
+    from futu import *
     quote_ctx = OpenHKTradeContext(host='127.0.0.1', port=11111)
     quote_ctx.close()
 	
@@ -103,7 +103,7 @@ unlock_trade - 解锁交易
  
  .. code:: python
  
-  from futuquant import *
+  from futu import *
   pwd_unlock = '123456'
   trd_ctx = OpenHKTradeContext(host='127.0.0.1', port=11111)
   print(trd_ctx.unlock_trade(pwd_unlock))
@@ -138,7 +138,7 @@ accinfo_query - 获取账户资金数据
  
  .. code:: python
  
-  from futuquant import *
+  from futu import *
   pwd_unlock = '123456'
   trd_ctx = OpenHKTradeContext(host='127.0.0.1', port=11111)
   trd_ctx.unlock_trade(pwd_unlock)
@@ -190,7 +190,7 @@ position_list_query - 获取账户持仓列表
  
  .. code:: python
  
-  from futuquant import *
+  from futu import *
   pwd_unlock = '123456'
   trd_ctx = OpenHKTradeContext(host='127.0.0.1', port=11111)
   trd_ctx.unlock_trade(pwd_unlock)
@@ -220,18 +220,22 @@ place_order - 下单
  :return(ret_code, ret_data): ret_code为RET_OK时，ret_data为DataFrame数据，否则为错误原因字符串，DataFrame数据跟下面的 order-list-query_ (获取订单列表)相同。
  
 	如果是OpenHKCCTradeContext，返回数据中order_type仅有OrderType.NORMAL
- 
+
  :example:
- 
+	
  .. code:: python
  
- 	from futuquant import *
+ 	from futu import *
 	pwd_unlock = '123456'
 	trd_ctx = OpenHKTradeContext(host='127.0.0.1', port=11111)
 	print(trd_ctx.unlock_trade(pwd_unlock))
 	print(trd_ctx.place_order(price=700.0, qty=100, code="HK.00700", trd_side=TrdSide.SELL))
 	trd_ctx.close()
+	
+.. note::
 
+	* 接口限制请参见 `下单限制 <../protocol/intro.html#id24>`_
+	
 ----------------------------
 
 order_list_query - 获取订单列表
@@ -273,7 +277,7 @@ order_list_query - 获取订单列表
  
  .. code:: python
  
-  from futuquant import *
+  from futu import *
   pwd_unlock = '123456'
   trd_ctx = OpenHKTradeContext(host='127.0.0.1', port=11111)
   print(trd_ctx.unlock_trade(pwd_unlock))
@@ -312,14 +316,18 @@ modify_order - 修改订单
  
  .. code:: python
  
-  from futuquant import *
+  from futu import *
   pwd_unlock = '123456'
   trd_ctx = OpenHKTradeContext(host='127.0.0.1', port=11111)
   print(trd_ctx.unlock_trade(pwd_unlock))
   order_id = "12345"
   print(trd_ctx.modify_order(ModifyOrderOp.CANCEL, order_id, 0, 0))
   trd_ctx.close()
+  
+.. note::
 
+	* 接口限制请参见 `改单限制 <../protocol/intro.html#id25>`_
+	
 ----------------------------
 
 change_order - 改单(老接口，兼容以前)
@@ -343,7 +351,7 @@ change_order - 改单(老接口，兼容以前)
  
  .. code:: python
  
-  from futuquant import *
+  from futu import *
   pwd_unlock = '123456'
   trd_ctx = OpenHKTradeContext(host='127.0.0.1', port=11111)
   print(trd_ctx.unlock_trade(pwd_unlock))
@@ -351,6 +359,10 @@ change_order - 改单(老接口，兼容以前)
   print(trd_ctx.change_order(order_id, 100.0, 1))
   trd_ctx.close()
   
+.. note::
+
+	* 接口限制请参见 `改单限制 <intro.html#id25>`_
+	
 ----------------------------
 
 deal_list_query - 获取成交列表
@@ -385,7 +397,7 @@ deal_list_query - 获取成交列表
  
  .. code:: python
  
-  from futuquant import *
+  from futu import *
   pwd_unlock = '123456'
   trd_ctx = OpenHKTradeContext(host='127.0.0.1', port=11111)
   print(trd_ctx.unlock_trade(pwd_unlock))
@@ -415,7 +427,7 @@ history_order_list_query - 获取历史订单列表
  
  .. code:: python
  
-  from futuquant import *
+  from futu import *
   pwd_unlock = '123456'
   trd_ctx = OpenHKTradeContext(host='127.0.0.1', port=11111)
   print(trd_ctx.unlock_trade(pwd_unlock))
@@ -423,6 +435,10 @@ history_order_list_query - 获取历史订单列表
   print(trd_ctx.history_order_list_query([OrderStatus.FILLED_ALL, OrderStatus.FILLED_PART], 'HK.00700'))
   trd_ctx.close()
   
+.. note::
+
+	* 接口限制请参见 `获取历史订单列表限制 <intro.html#id26>`_
+	
 ----------------------------
 
 history_deal_list_query - 获取历史成交列表
@@ -444,7 +460,7 @@ history_deal_list_query - 获取历史成交列表
  
  .. code:: python
  
-  from futuquant import *
+  from futu import *
   pwd_unlock = '123456'
   trd_ctx = OpenHKTradeContext(host='127.0.0.1', port=11111)
   print(trd_ctx.unlock_trade(pwd_unlock))
@@ -452,7 +468,10 @@ history_deal_list_query - 获取历史成交列表
   print(trd_ctx.history_deal_list_query('HK.00700'))
   trd_ctx.close()
 
- 
+.. note::
+
+	* 接口限制请参见 `获取历史成交列表限制 <intro.html#id27>`_
+	
 ----------------------------
 
 acctradinginfo_query - 查询账户下最大可买卖数量
@@ -489,7 +508,7 @@ max_buy_back              float         卖空后，需要买回的最大整手�
  
  .. code:: python
  
-  from futuquant import *
+  from futu import *
   pwd_unlock = '123456'
   trd_ctx = OpenHKTradeContext(host='127.0.0.1', port=11111)
   print(trd_ctx.unlock_trade(pwd_unlock))
@@ -497,6 +516,10 @@ max_buy_back              float         卖空后，需要买回的最大整手�
   print(trd_ctx.acctradinginfo_query(OrderType.NORMAL, 'HK.00700', 400, order_id, 0.01))
   trd_ctx.close()
 
+.. note::
+
+	* 接口限制请参见 `获取最大交易数量限制 <intro.html#id23>`_
+	
 ----------------------------
 
 TradeOrderHandlerBase - 响应订单推送基类
@@ -518,7 +541,7 @@ on_recv_rsp - 响应订单推送
  
  .. code:: python
  
-  from futuquant import *
+  from futu import *
   from time import sleep
   class TradeOrderTest(TradeOrderHandlerBase):
     """ order update push"""
@@ -560,7 +583,7 @@ on_recv_rsp - 响应成交推送
  
  .. code:: python
  
-  from futuquant import *
+  from futu import *
   from time import sleep
   class TradeDealTest(TradeDealHandlerBase):
     """ order update push"""
@@ -582,80 +605,6 @@ on_recv_rsp - 响应成交推送
   trd_ctx.close()
 	
 ----------------------------
-
-暗盘交易
-================
-
-已开户用户需要确认 `暗盘交易风险 <https://help.futu5.com/darktrade/>`_ 才可以进行暗盘交易。
-
-.. note::
-
-  * 暗盘目前仅支持限价单
-  
-----------------------------
-
-模拟交易
-================
-
-支持港美A股三大市场模拟交易，对比真实交易有以下区别：
-
-1.订单的状态不支持删除、部分成交、生效、失效状态
-
-2.不支持生效失效、删除订单操作，仅支持支持改单， 撤单
-
-3.不支持成交数据，包括今日成交，历史成交，成交推送
-
-4.下单仅支持Normal类型
-
-5.模拟交易不需要解锁交易
-
-可视数据可跳转至 `模拟交易 <https://m-match.futunn.com/simulate/>`_，该页面仅支持手机浏览器访问。
-
-----------------------------
-
-真实交易
-================
-
-真实交易支持港股、美股、A股通市场，区别如下
-
-+------------------------+-------------------------+-------------------------+----------------------+----------------------+
-| 区别                   | 交易方向                | 订单类型                | 股票代码             | 订单操作             |
-+========================+=========================+=========================+======================+======================+
-| 港股                   | 只支持买入和卖出        | 支持增强限价单，竞价单，| 5位数字              | 支持改单、撤单、生效 |
-|                        |                         |                         |                      |                      |
-|                        |                         | 竞价限价单，绝对限价单，|                      | 失效、删除           |
-|                        |                         |                         |                      |                      |
-|                        |                         | 特别限价单              |                      |                      |
-+------------------------+-------------------------+-------------------------+----------------------+----------------------+
-| 美股                   | 下单只支持传入买入和卖出| 支持限价单，市价单      | 无限制               | 仅支持改单和撤单     |
-|                        |                         |                         |                      |                      |
-|                        | 但产生的订单类型可能会出|                         |                      |                      |
-|                        |                         |                         |                      |                      |
-|                        | 现卖空和买回            |                         |                      |                      |
-+------------------------+-------------------------+-------------------------+----------------------+----------------------+
-| A股通                  | 只支持买入和卖出        | 仅支持A股限价委托       | 6位数字              |  仅支持改单和撤单    |
-+------------------------+-------------------------+-------------------------+----------------------+----------------------+
-
-----------------------------
-
-接口频率限制
-================
-
-交易相关请求到达网关客户端后， 会转发请求到futu后台服务器，为防止恶意频繁请求，保护服务器负载，会对一些交易接口进行请求频率限制，
-目前的频率限制是以连续30秒内，限制请求次数，具体那些接口有限制以及限制次数如下:
-
- ==========================        =====================
- 接口名称                          连续30秒内次数限制
- ==========================        =====================
- unlock_trade                      10
- place_order                       15
- modify_order，change_order        20
- history_order_list_query          10
- history_deal_list_query           10
- ==========================        =====================
-.. note::
-
-  * 后台另外限制了下单频率，1秒内下单不可超过5次
 
 
 
